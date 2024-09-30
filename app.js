@@ -19,6 +19,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/vote', voteRoutes);
 app.use('/api/admin', adminRoutes);
 
+
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('MongoDB connected...'))

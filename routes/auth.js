@@ -15,13 +15,11 @@ router.post('/register', async (req, res) => {
 
         
         const trimmedPassword = password.trim()
-        // Hash password
-        // const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(trimmedPassword, 10);
+        
         user = new User({
             name,
             email,
-            password:hashedPassword
+            password:trimmedPassword
         });
 
         await user.save();
@@ -47,15 +45,10 @@ router.post('/login', async (req, res) => {
 
         const trimmedPassword = password.trim()
 
-        // log eneterd and stored pass
-        console.log(`Entered pass:${password}`);
-        console.log(`Stored hashed pass: ${user.password}`);
 
         const isMatch = await bcrypt.compare(trimmedPassword, user.password);
         // if(isMatch){console.log(`passwords match !!`);}
         if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
-
-        console.log(`password match: ${isMatch}`);
 
         // Return jsonwebtoken
         const payload = {
