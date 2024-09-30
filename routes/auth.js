@@ -54,7 +54,8 @@ router.post('/login', async (req, res) => {
         // Return jsonwebtoken
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                role:user.role
             }
         };
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }); // Use JWT_SECRET from .env

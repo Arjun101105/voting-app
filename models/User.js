@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     enum: ['voter', 'admin'],
     default: 'voter',
+  },
+  hasVoted:{
+    type:Boolean,
+    default: false
   }
 });
 
