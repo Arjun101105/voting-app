@@ -21,8 +21,8 @@ try{
 
     const data = await response.json();
     console.log(data);
-}catch(e){
     alert(data.msg || 'Registration successful!');
+}catch(e){
     console.log(`Error: ${e}`);
 }
 });
