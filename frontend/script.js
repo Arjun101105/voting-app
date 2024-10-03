@@ -5,12 +5,12 @@ const votingSection = document.getElementById('voting-section');
 const candidatesDiv = document.getElementById('candidates');
 const voteButton = document.getElementById('vote-button');
 
-registerForm.addEventListener('submit', async (e) => {
+document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = document.getElementById('reg-name').value;
     const email = document.getElementById('reg-email').value;
     const password = document.getElementById('reg-password').value;
-
+try{
     const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: {
@@ -20,7 +20,11 @@ registerForm.addEventListener('submit', async (e) => {
     });
 
     const data = await response.json();
+    console.log(data);
+}catch(e){
     alert(data.msg || 'Registration successful!');
+    console.log(`Error: ${e}`);
+}
 });
 
 loginForm.addEventListener('submit', async (e) => {
@@ -28,7 +32,7 @@ loginForm.addEventListener('submit', async (e) => {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
-    const response = await fetch('http://localhost:5000/api/auth/login', {
+   try{ const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -41,10 +45,15 @@ loginForm.addEventListener('submit', async (e) => {
     if (data.token) {
         localStorage.setItem('token', data.token);
         alert('Login successful!');
-        loadCandidates(); // Load candidates after login
+        window.location.href = 'vote.html'
+        // loadCandidates(); // Load candidates after login
     } else {
         alert(data.msg || 'Login failed!');
     }
+}catch(e){
+    console.log('error: ', e);
+    alert('login failed !')
+}
 });
 
 async function loadCandidates() {
@@ -71,7 +80,7 @@ async function loadCandidates() {
 
 voteButton.addEventListener('click', async () => {
     const selectedCandidateId = document.querySelector('input[name="candidate"]:checked').value;
-
+try{
     const response = await fetch('http://localhost:5000/api/vote', { // Update this endpoint based on your actual voting route
         method: 'POST',
         headers: {
@@ -83,4 +92,8 @@ voteButton.addEventListener('click', async () => {
 
     const data = await response.json();
     alert(data.msg || 'Vote cast successfully!');
+}catch(e){
+    console.log('error casting vote', e);
+    alert("failed to cast vote ")
+}
 });

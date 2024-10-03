@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors')
 
 // Load environment variables from .env file
 dotenv.config();
@@ -13,7 +14,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-
+app.use(cors())
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/vote', voteRoutes);

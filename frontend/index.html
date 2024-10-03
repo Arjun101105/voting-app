@@ -15,7 +15,7 @@
             <input type="text" id="reg-name" placeholder="Name" required>
             <input type="email" id="reg-email" placeholder="Email" required>
             <input type="password" id="reg-password" placeholder="Password" required>
-            <button type="submit">Register</button>
+            <button type="submit" id="register-btn">Register</button>
         </form>
 
         <h2>Login</h2>
@@ -33,5 +33,11 @@
     </div>
 
     <script src="script.js"></script>
+    <button onclick="goToAdmin()">Admin</button>
+    <script>
+        function goToAdmin(){
+            window.location.href = 'admin.html'
+        }
+    </script>
 </body>
 </html>
