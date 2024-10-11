@@ -1,1 +1,31 @@
-here you add candidates
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+
+<h1>Add Candidates</h1>
+<div id="new-candidate">
+    <form id="candidate-form">
+        <input type="text" id="candidate-name" placeholder="Candidate Name" required>
+        <input type="text" id="candidate-party" placeholder="Candidate Party" required>
+        <button type="submit" id="candidate-submit">Register Candidate</button>
+        <button type="button" onclick="loggingOut()">Logout</button>
+        <script>
+            function loggingOut() {
+                window.location.href = 'index.html'
+            }
+        </script>
+    </form>
+    <div id="addCand-msg"></div>
+</div>
+
+<script src="addCandidate.js"></script>
+</body>
+
+</html>
