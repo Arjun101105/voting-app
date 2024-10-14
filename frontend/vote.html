@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <h2>Welcome to Voting Page</h2>
-    <div id="candidates"></div>
+
+    <div id="candidates">
+    </div>
+    <div>
+        <button id="logout-btn" onclick="loggingOut()">Logout</button>
+        <button id="results-btn" onclick="results()">Results</button>
+    </div>
+    
     
     <script>
         // Replace with the token you got from login
@@ -20,19 +31,19 @@
                 'x-auth-token': token
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            const candidateContainer = document.getElementById('candidates');
-            data.forEach(candidate => {
-                candidateContainer.innerHTML += `
-                    <div>
-                        <h3>${candidate.name} - ${candidate.party}</h3>
-                        <button onclick="voteForCandidate('${candidate._id}')">Vote</button>
+            .then(response => response.json())
+            .then(data => {
+                const candidateContainer = document.getElementById('candidates');
+                data.forEach(candidate => {
+                    candidateContainer.innerHTML += `
+                    <div class="candidate">
+                        <span class="candidate-name">${candidate.name} - ${candidate.party}</span>
+                        <button id="vote-button-${candidate._id}" class="vote-button" onclick="voteForCandidate('${candidate._id}')">Vote</button>
                     </div>
                 `;
-            });
-        })
-        .catch(err => console.error('Error fetching candidates:', err));
+                });
+            })
+            .catch(err => console.error('Error fetching candidates:', err));
 
         // Vote function
         function voteForCandidate(candidateId) {
@@ -44,18 +55,21 @@
                 },
                 body: JSON.stringify({ candidateId })
             })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.msg);
-            })
-            .catch(err => console.error('Error voting for candidate:', err));
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.msg);
+                })
+                .catch(err => console.error('Error voting for candidate:', err));
         }
-    </script>
-    <button onclick="loggingOut()">Logout</button>
-    <script>
-        function loggingOut(){
-            window.location.href = 'index.html'
+
+        function loggingOut() {
+            window.location.href = 'index.html';
+        }
+
+        function results() {
+            window.location.href = 'results.html';
         }
     </script>
 </body>
+
 </html>

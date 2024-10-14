@@ -9,34 +9,29 @@
 <body>
     <h1>Online Voting App</h1>
 
-    <div id="auth-forms">
+    <div id="auth-forms" class="container"> <!-- Added container class -->
         <h2>Register</h2>
         <form id="register-form">
             <input type="text" id="reg-name" placeholder="Name" required>
             <input type="email" id="reg-email" placeholder="Email" required>
             <input type="password" id="reg-password" placeholder="Password" required>
-            <button type="submit" id="register-btn">Register</button>
+            <button type="submit" id="register-btn">Register</button> <!-- Added ID for register button -->
         </form>
 
         <h2>Login</h2>
         <form id="login-form">
             <input type="email" id="login-email" placeholder="Email" required>
             <input type="password" id="login-password" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <button type="submit" id="login-btn">Login</button> <!-- Added ID for login button -->
         </form>
+        <br>
     </div>
-
-    <div id="voting-section" style="display:none;">
-        <h2>Vote for Your Candidate</h2>
-        <div id="candidates"></div>
-        <button id="vote-button">Vote</button>
-    </div>
+    <button id="admin-btn" onclick="goToAdmin()">Admin</button> <!-- Added ID for admin button -->      
 
     <script src="script.js"></script>
-    <button onclick="goToAdmin()">Admin</button>
     <script>
-        function goToAdmin(){
-            window.location.href = 'admin2.html'
+        function goToAdmin() {
+            window.location.href = 'admin2.html';
         }
     </script>
 </body>
